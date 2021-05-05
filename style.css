@@ -1,0 +1,10 @@
+.panel {
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    transition: 0.3s ease;
+    background: red url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png") center;
+    background-size: cover;
+
+    transform-style: preserve-3d;
+}
