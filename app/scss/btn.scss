@@ -1,0 +1,11 @@
+$padding: 20px;
+$back: red;
+$color: #fff;
+
+.button{
+  padding: $padding;
+  background: $back;
+  border-radius: 4px;
+  color: $color;
+
+}

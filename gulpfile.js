@@ -1,9 +1,10 @@
-const {src, dest, series} = require('gulp')
+const {src, dest, series, watch} = require('gulp')
 const scss = require('gulp-sass')
 const imagemin = require('gulp-imagemin');
 const uglify = require('gulp-uglify');
 const pug = require('gulp-pug');
 const rename = require("gulp-rename");
+const connect = require('gulp-connect')
 
 const appPath = {
     scss: './app/scss/**/*.scss',
@@ -25,33 +26,50 @@ function image() {
         .pipe(rename(function (path) {
             return {
                 dirname: path.dirname,
-                basename: path.basename.substr(0,3) + "-test",
+                basename: path.basename.substr(0, 3) + "-test",
                 extname: path.extname
             };
         }))
         .pipe(dest(destPath.img))
+        .pipe(connect.reload())
 }
 
 function scssCompress() {
     return src(appPath.scss)
         .pipe(scss({
-            outputStyle: 'compressed'
+            // outputStyle: 'compressed'
         }))
         .pipe(dest(destPath.css))
+        .pipe(connect.reload())
 }
 
 function pugToHtml() {
-    return src('./app/index.pug')
+    return src('./app/*.pug')
         .pipe(pug({
             pretty: true
         }))
         .pipe(dest('./dist/'))
+        .pipe(connect.reload())
 }
 
 function jsMin() {
-   return src(appPath.js)
-       .pipe(uglify())
-       .pipe(dest(destPath.js))
+    return src(appPath.js)
+        .pipe(uglify())
+        .pipe(dest(destPath.js))
 }
 
-exports.default = series(scssCompress, image, pugToHtml, jsMin)
+function server() {
+    connect.server({
+        name: 'Dev App',
+        root: 'dist',
+        port: 8080,
+        livereload: true
+    })
+}
+
+watch('app/*.pug', pugToHtml);
+watch(appPath.scss, scssCompress);
+watch(appPath.js, jsMin);
+watch(appPath.img, {events: 'add'}, image);
+
+exports.default = series(scssCompress, image, pugToHtml, jsMin, server)

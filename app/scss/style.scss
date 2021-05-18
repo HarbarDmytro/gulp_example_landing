@@ -1,11 +1,91 @@
-body {
-  font-size: 14px;
+$p: 500px;
 
-  h1 {
+.parent {
+  color: blue;
+  padding: $p;
+
+  .child {
     color: red;
+    padding: $p;
+  }
 
-    &::before {
-      content: '+ ';
+  &-ppp {
+    padding: $p;
+    color: red;
+  }
+
+  &:last-child {
+    color: red;
+  }
+}
+
+
+//@mixin test($array...) {
+//  @each $item in $array {
+//    .col-#{$item}{
+//      @if $item % 2 == 0 {
+//        width: 100/$item #{'%'};
+//      }
+//    }
+//  }
+//}
+//
+//@include test(1,2,3,4,5,6,7, 8)
+//
+//
+////.test{
+////  @include test(1,2,3)
+////}
+//
+//
+//
+//
+//
+//
+//
+//
+////@import "../../node_modules/bootstrap/scss/bootstrap";
+////
+//////$padding: 30px;
+//////$back: green;
+//////root{$back: green}
+//////:root{$back: green}
+////@import "btn";
+////
+////@mixin test($padding, $back){
+////  color: red;
+////  padding: $padding;
+////  @include box-shadow(5px 5px 0 0 #000);
+////
+////  .c{
+////    padding: $padding;
+////  }
+////}
+////
+////.e {
+////  @include test(10px, #000eee)
+////}
+////
+////
+////
+
+
+header {
+  background: #eee;
+
+  .navbar {
+    padding: 25px 0;
+
+    .navbar-nav {
+      a.nav-link {
+        color: #0F2336;
+        font-weight: bold;
+        padding: 17px 25px;
+      }
+
+      li.nav-item {
+        padding: 0 15px;
+      }
     }
   }
 }

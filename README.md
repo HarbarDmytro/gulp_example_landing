@@ -1,13 +1,6 @@
-/*
-* d = ?
-*
+# for init
+## ```npm i - gulp```
+## ```npm i```
 
-* d < 0
-*    return null
-     
-* d = 0
-*   return ...
-*   
-*
-* return [x1, x2]
-* */
+# for start 
+## ```gulp```
